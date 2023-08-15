@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.grid-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 800px;
+  width: 800px;
+}
+
+.cell {
+  border: 1px solid lightgrey;
+  display: inline-block;
+}
+
+.character {
+background-image: url('../images/skiingpenguin.jpg');
+background-repeat: no-repeat;
+background-size: contain;
+}
+
+.obstacle-0 {
+ background-image: url('../images/obstacle-0.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.obstacle-1 {
+  background-image: url('../images/obstacle-1.gif');
+   background-repeat: no-repeat;
+   background-size: contain;
+ }
