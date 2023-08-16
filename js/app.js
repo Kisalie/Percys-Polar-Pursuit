@@ -2,6 +2,16 @@
 // Board elements
 const grid = document.querySelector('.grid')
 
+
+// Player Screen
+const startButton = document.querySelector('.start-button')
+const playerScreen = document.querySelector('.player-screen')
+
+
+// Game Over Screen
+const restartButton = document.querySelector('.restart-button')
+const gameOverScreen = document.querySelector('.game-over')
+
 // Global variables
 const width = 9
 const height = 8
@@ -14,9 +24,8 @@ const playerTracking = {
   divReference: null,
   lives: 3
 }
-const isCharacterPlaying = true
 
-// Storing the 2D array of cells
+// Storing the array of cells as [row[], row[]]
 const rows = []
 
 
@@ -68,7 +77,7 @@ function addObstacle(rows, x, y) {
      
 
       // If the left gives us undefined, then move it completely to the right
-      console.log('yayyy!')
+      // console.log('yayyy!')
     }, 500)
 
 
@@ -98,16 +107,12 @@ function generateGrid() {
     // Create a new row array for every iteration of height
     const currentRow = []
     for(let x = 0; x < width; x++){
-      // Create a div
+    
       const cell = document.createElement('DIV')
-      // Give the div a class of "cell"
       cell.classList.add('cell')
-      // Set the width to be a percentage of the width
       cell.style.width = `${100 / width}%`
-      // Set the height to be a percentage of the height
       cell.style.height = `${100 / height}%`
-      // Add data index
-      const index = y * width + x // Calculate the 1D index
+      const index = y * width + x 
       cell.dataset.index = index
       // Add the new cell to the grid container
       grid.append(cell)
@@ -124,23 +129,29 @@ function generateGrid() {
 
 
 function addCharacter() {
-  const lastCell = rows[rows.length-1][8]
-  playerTracking.x = 8
+  const lastCell = rows[rows.length-1][4]
+  playerTracking.x = 4
   playerTracking.y = rows.length -1
-  playerTracking.divReference = rows[rows.length-1][8]
+  playerTracking.divReference = rows[rows.length-1][4]
   lastCell.classList.add('character')
  }
 
+ const resetCharacter = () => {
+  playerTracking.divReference.classList.remove('character')
+  addCharacter()
+ }
+
 function moveCharacter(e){
-  // Keep track of where we've gone:
+  // Keep track of where the player has gone:
   // If the character would go off the grid, don't do anything:
   const key = e.keyCode
 
 if (key === 38) {
-  // If we're going up we want to decrease y by 1
+  console.log('Up')
+  // If going up we want to decrease y by 1
   const newGridCell = rows?.[playerTracking.y - 1]?.[playerTracking.x]
   if (newGridCell) {
-    // Before moving the player, let's remove the class:
+    // Before moving the player, remove the class:
     playerTracking.divReference.classList.remove('character')
     playerTracking.y -= 1
     playerTracking.divReference = newGridCell 
@@ -152,30 +163,31 @@ if (key === 38) {
   console.log('down')
   const newGridCell = rows?.[playerTracking.y + 1]?.[playerTracking.x]
   if (newGridCell) {
-    // Before moving the player, let's remove the class:
+    // Before moving the player, remove the class:
     playerTracking.divReference.classList.remove('character')
     playerTracking.y += 1
     playerTracking.divReference = newGridCell 
     playerTracking.divReference.classList.add('character')
 
   }
-  // If we are going down increase y by 1
+  // If going down increase y by 1
 } else if (key === 37) {
+  console.log('left')
   const newGridCell = rows?.[playerTracking.y]?.[playerTracking.x -1]
   if (newGridCell) {
-    // Before moving the player, let's remove the class:
+    // Before moving the player,remove the class:
     playerTracking.divReference.classList.remove('character')
     playerTracking.x -= 1
     playerTracking.divReference = newGridCell 
     playerTracking.divReference.classList.add('character')
 
   }
-  // If we're going to the left decreasing x by 1
-  console.log('left')
+  // If going to the left decreasing x by 1
+
 } else if (key === 39) {
   const newGridCell = rows?.[playerTracking.y]?.[playerTracking.x +1]
   if (newGridCell) {
-    // Before moving the player, let's remove the class:
+    // Before moving the player, remove the class:
     playerTracking.divReference.classList.remove('character')
     playerTracking.x += 1
     playerTracking.divReference = newGridCell 
@@ -193,11 +205,11 @@ generateGrid()
 addCharacter()
 // addObstacle(rows, 1, 1)
 const obstacles = addObstacles(rows, [1, 3, 5, 8, 1], [1, 1, 1, 1, 3])
-document.addEventListener('keyup', moveCharacter)
+document.addEventListener('keydown', moveCharacter)
 console.log(obstacles)
 
 function collisionDetection() {
-  console.log(playerTracking.lives)
+  // console.log(playerTracking.lives)
 
 
   if (detectPlayerOnAnyObstacle(playerTracking, obstacles)) {
@@ -208,22 +220,59 @@ function collisionDetection() {
       playerTracking.lives -= 1;
 
       // Delete the current cell that has the playerTracking in it.
-      playerTracking.divReference.classList.remove('character')
-
-      addCharacter()
+      resetCharacter()
 
       if (playerTracking.lives <= 0) {
           console.log("Game Over!");
+          // Hide the the grid
+          // Show gameOver screen
+          gameOverScreen.style.display = 'flex'
+          grid.style.display = 'none'
+
           clearInterval(collisionInterval);
           // Optionally stop other intervals or game loops, display an end-game screen, etc.
       }
   }
 }
 
+// cells[35].style.background = 'red'
+
+// const iceblockPositions = [0, 5, 10]
+// for (const index of iceblockPositions) {
+//   cells[index].style.background = 'red'
+// }
+
+// rows[0][1].style.background = 'red'
+// rows[0].map((val) => {
+//  val.style.background = 'red'
+// })
+
 let collisionInterval; 
+collisionInterval = setInterval(collisionDetection, 100); // Check for collision every 100ms
 
-if (isCharacterPlaying) {
-  collisionInterval = setInterval(collisionDetection, 100); // Check for collision every 100ms
-}
 
+
+startButton.addEventListener('click', () => {
+//  display: none for the player screen
+// display: flex for grid
+playerScreen.style.display = 'none'
+grid.style.display = 'flex'
+
+})
+
+restartButton.addEventListener('click', () => {
+//  display: none for the player screen
+//  display: none for the gameOver screen
+//  display: flex for the grid
+playerScreen.style.display = 'none'
+gameOverScreen.style.display = 'none'
+grid.style.display = 'flex'
+// Change the lives to 3:
+playerTracking.lives = 3
+
+// Add the setInterval function:
+collisionInterval = setInterval(collisionDetection, 100);
+
+resetCharacter ()
+})
 
