@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  background: linear-gradient(10deg, #5DBBB3, transparent)
 }
 
 .grid-wrapper {
@@ -11,6 +12,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+ 
 }
 
 .player-screen {
@@ -23,46 +26,58 @@ body {
 .game-over {
   display: none;
   flex-direction: column;
+  align-items: center;
 }
 
 .game-over-gif {
   width: 500px;
 }
 
+h1 {
+  font-family: 'Spicy Rice';
+  font-size: 80px;
+  color: #527C97;
+}
+
 h2 {
   display:flex;
   justify-content: center;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color:#3D76AD;
 }
 
-p {
+.how-to-play {
   font-family: 'Arial', sans-serif;
   line-height: 2.5;
-  height:160px;
   padding: 10px;
   margin: 20px;
   background: lightblue;
+  width: 650px;
+  border-radius: 16px;
+  color: #3D76AD;
+  border-style:solid;
 }
 
-.start-button {
- border: none;
- border-radius: 16px;
- margin: 3rem;
- padding: 1.5rem 3rem;
- color: blue;
- font-size: 16px;
 
-}
-
-.restart-button {
+.btn {
   margin: 1.5rem;
   padding: 1.5rem 2rem;
   border-radius: 16px;
   font-size: 16px;
   border: none;
   color: white;
-  background: #9EDDE5;
+  background: #39809C;
   font-weight: bold;
+  width: 200px;
+}
+
+.btn:hover{
+ background-color:#2b6278 ;
+}
+
+.btn:active {
+  transform: scale(0.90);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .grid {
@@ -72,18 +87,30 @@ p {
   height: 800px;
   width: 800px;
   display: none;
+  
+}
 
+
+.you-win-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background: #7CD8D6 ;
 }
 
 .cell {
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   display: inline-block;
+  z-index: 0; /* Higher value than other grid items */
 }
 
 .character {
-background-image: url('../images/skiingpenguin.jpg');
+background-image: url('../images/skiingpenguin.png');
 background-repeat: no-repeat;
 background-size: contain;
+background-color: transparent;
+z-index: 10; /* Higher value than other grid items */
+
 }
 
 .obstacle-0 {
@@ -94,6 +121,12 @@ background-size: contain;
 
 .obstacle-1 {
   background-image: url('../images/obstacle-1.gif');
+   background-repeat: no-repeat;
+   background-size: contain;
+ }
+
+ .obstacle-2 {
+  background-image: url('../images/obstacle-2.png');
    background-repeat: no-repeat;
    background-size: contain;
  }

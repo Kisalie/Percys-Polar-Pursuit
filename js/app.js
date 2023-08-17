@@ -2,7 +2,6 @@
 // Board elements
 const grid = document.querySelector('.grid')
 
-
 // Player Screen
 const startButton = document.querySelector('.start-button')
 const playerScreen = document.querySelector('.player-screen')
@@ -11,6 +10,14 @@ const playerScreen = document.querySelector('.player-screen')
 // Game Over Screen
 const restartButton = document.querySelector('.restart-button')
 const gameOverScreen = document.querySelector('.game-over')
+
+// You Win Screen
+const playAgainButton = document.querySelector('.play-again')
+const youWinScreen = document.querySelector('.you-win-screen')
+
+// Lives
+const livesDisplay = document.querySelector('#display-lives')
+
 
 // Global variables
 const width = 9
@@ -46,7 +53,8 @@ function addObstacle(rows, x, y) {
     0: 'obstacle-0',
     1: 'obstacle-1',
     3: 'obstacle-0',
-    5: 'obstacle-1',
+    5: 'obstacle-2',
+    6: 'obstacle-2'
   }
 
   if (cell) {
@@ -138,6 +146,9 @@ function addCharacter() {
 
  const resetCharacter = () => {
   playerTracking.divReference.classList.remove('character')
+  livesDisplay.innerHTML =  playerTracking.lives ? '❤️'.repeat( playerTracking.lives) : '💔'
+
+  // Add lives
   addCharacter()
  }
 
@@ -145,6 +156,9 @@ function moveCharacter(e){
   // Keep track of where the player has gone:
   // If the character would go off the grid, don't do anything:
   const key = e.keyCode
+
+  // If they are at the top, then don't move:
+  if (playerTracking.y === 0) return 
 
 if (key === 38) {
   console.log('Up')
@@ -204,12 +218,17 @@ if (key === 38) {
 generateGrid()
 addCharacter()
 // addObstacle(rows, 1, 1)
-const obstacles = addObstacles(rows, [1, 3, 5, 8, 1], [1, 1, 1, 1, 3])
+const obstacles = addObstacles(rows, [1, 3, 5, 8, 1, 3, 5, 7, 8, 5, 3], [1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 5])
 document.addEventListener('keydown', moveCharacter)
 console.log(obstacles)
 
 function collisionDetection() {
-  // console.log(playerTracking.lives)
+
+  if (playerTracking.y === 0) {
+    // Hide grid and show the player screen:
+    youWinScreen.style.display = 'flex'
+    grid.style.display = 'none'
+  }
 
 
   if (detectPlayerOnAnyObstacle(playerTracking, obstacles)) {
@@ -243,9 +262,21 @@ function collisionDetection() {
 // }
 
 // rows[0][1].style.background = 'red'
-// rows[0].map((val) => {
-//  val.style.background = 'red'
-// })
+rows[0].map((val) => {
+  val.style.backgroundImage= 'url(../images/arctic.jpg)'
+//  val.style.background = 'cover'
+})
+
+rows[1].map((val) => {
+  val.style.background = '#9AD7F5'
+ })
+
+
+ rows[7].map((val) => {
+  val.style.background = 'url(../images/realsnow.jpg)'
+ })
+
+
 
 let collisionInterval; 
 collisionInterval = setInterval(collisionDetection, 100); // Check for collision every 100ms
@@ -275,4 +306,20 @@ collisionInterval = setInterval(collisionDetection, 100);
 
 resetCharacter ()
 })
+
+playAgainButton.addEventListener('click', () => {
+  //  display: none for the player screen
+ //  display: none for the gameOver screen
+youWinScreen.style.display = 'none'
+gameOverScreen.style.display = 'none'
+grid.style.display = 'flex'
+
+playerTracking.lives = 3
+
+// Add the setInterval function:
+collisionInterval = setInterval(collisionDetection, 100);
+
+resetCharacter ()
+})
+
 
