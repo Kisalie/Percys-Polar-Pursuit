@@ -278,7 +278,7 @@ rows[3].map((val) => {
 })
 
 rows[2].map((val) => {
-  val.style.background = 'url(mages/realsnow.jpg)'
+  val.style.background = 'url(images/realsnow.jpg)'
 })
 
 rows[4].map((val) => {
