@@ -257,7 +257,7 @@ function collisionDetection() {
 }
 
 rows[0].map((val) => {
-  val.style.backgroundImage= 'url(../images/arctic.jpg)'
+  val.style.backgroundImage= 'url(images/arctic.jpg)'
 //  val.style.background = 'cover'
 })
 
@@ -266,7 +266,7 @@ rows[1].map((val) => {
 })
 
 rows[7].map((val) => {
-  val.style.background = 'url(../images/realsnow.jpg)'
+  val.style.background = 'url(images/realsnow.jpg)'
 })
 
 rows[5].map((val) => {
@@ -278,11 +278,11 @@ rows[3].map((val) => {
 })
 
 rows[2].map((val) => {
-  val.style.background = 'url(../images/realsnow.jpg)'
+  val.style.background = 'url(mages/realsnow.jpg)'
 })
 
 rows[4].map((val) => {
-  val.style.background = 'url(../images/realsnow.jpg)'
+  val.style.background = 'url(images/realsnow.jpg)'
 })
 
 rows[6].map((val) => {
