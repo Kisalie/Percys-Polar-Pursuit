@@ -54,7 +54,8 @@ function addObstacle(rows, x, y) {
     1: 'obstacle-1',
     3: 'obstacle-0',
     5: 'obstacle-2',
-    6: 'obstacle-2'
+    6: 'obstacle-3'
+
   }
 
   if (cell) {
@@ -84,8 +85,7 @@ function addObstacle(rows, x, y) {
       }
      
 
-      // If the left gives us undefined, then move it completely to the right
-      // console.log('yayyy!')
+
     }, 500)
 
 
@@ -147,8 +147,7 @@ function addCharacter() {
  const resetCharacter = () => {
   playerTracking.divReference.classList.remove('character')
   livesDisplay.innerHTML =  playerTracking.lives ? '❤️'.repeat( playerTracking.lives) : '💔'
-
-  // Add lives
+  
   addCharacter()
  }
 
@@ -159,6 +158,8 @@ function moveCharacter(e){
 
   // If they are at the top, then don't move:
   if (playerTracking.y === 0) return 
+
+ 
 
 if (key === 38) {
   console.log('Up')
@@ -218,7 +219,8 @@ if (key === 38) {
 generateGrid()
 addCharacter()
 // addObstacle(rows, 1, 1)
-const obstacles = addObstacles(rows, [1, 3, 5, 8, 1, 3, 5, 7, 8, 5, 3], [1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 5])
+const obstacles = addObstacles(rows, [1, 3, 5, 8, 1, 3, 5, 7, 8, 5, 7, 5, 3, 2, 4, 6, 8], [1, 1, 1, 1, 3, 3, 3, 3, 5, 5, 5, 5, 5, 6, 6, 6, 6])
+// const obstacles = addObstacles(rows, [1, 3], [1, 1])
 document.addEventListener('keydown', moveCharacter)
 console.log(obstacles)
 
@@ -254,14 +256,6 @@ function collisionDetection() {
   }
 }
 
-// cells[35].style.background = 'red'
-
-// const iceblockPositions = [0, 5, 10]
-// for (const index of iceblockPositions) {
-//   cells[index].style.background = 'red'
-// }
-
-// rows[0][1].style.background = 'red'
 rows[0].map((val) => {
   val.style.backgroundImage= 'url(../images/arctic.jpg)'
 //  val.style.background = 'cover'
@@ -269,14 +263,31 @@ rows[0].map((val) => {
 
 rows[1].map((val) => {
   val.style.background = '#9AD7F5'
- })
+})
 
-
- rows[7].map((val) => {
+rows[7].map((val) => {
   val.style.background = 'url(../images/realsnow.jpg)'
- })
+})
 
+rows[5].map((val) => {
+  val.style.background = '#F3FAFF'
+})
 
+rows[3].map((val) => {
+  val.style.background = '#26658E '
+})
+
+rows[2].map((val) => {
+  val.style.background = 'url(../images/realsnow.jpg)'
+})
+
+rows[4].map((val) => {
+  val.style.background = 'url(../images/realsnow.jpg)'
+})
+
+rows[6].map((val) => {
+  val.style.background = '#FDFEFF'
+})
 
 let collisionInterval; 
 collisionInterval = setInterval(collisionDetection, 100); // Check for collision every 100ms
@@ -288,6 +299,13 @@ startButton.addEventListener('click', () => {
 // display: flex for grid
 playerScreen.style.display = 'none'
 grid.style.display = 'flex'
+
+function playAudio() {
+  new Audio("sounds/Wintervillage.mp3").play()
+}
+playAudio()
+
+const intervalId = setInterval (playAudio, 70000)
 
 })
 

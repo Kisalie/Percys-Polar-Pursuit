@@ -101,20 +101,78 @@ h2 {
 .cell {
   /* border: 1px solid lightgrey; */
   display: inline-block;
-  z-index: 0; /* Higher value than other grid items */
+  position:relative;
+}
+
+.cell.character::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  background: url('../images/skiingpenguin.png') no-repeat center center;
+  background-size: 100px;
+  z-index: 1;
 }
 
 .character {
-background-image: url('../images/skiingpenguin.png');
 background-repeat: no-repeat;
 background-size: contain;
 background-color: transparent;
-z-index: 10; /* Higher value than other grid items */
+}
 
+.cell.obstacle-0::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  background: url('../images/obstacle-0.gif') no-repeat center center;
+  background-size: 90px;
+  z-index: 1;
+}
+
+
+.cell.obstacle-1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  background: url('../images/obstacle-1.gif') no-repeat center center;
+  background-size: 100px;
+  z-index: 1;
+}
+
+.cell.obstacle-2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  background: url('../images/obstacle-2.png') no-repeat center center;
+  background-size: 100px;
+  z-index: 1;
+}
+
+
+.cell.obstacle-3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  background: url('../images/obstacle-3.jpg') no-repeat center center;
+  background-size: 100px;
+  z-index: 1;
 }
 
 .obstacle-0 {
- background-image: url('../images/obstacle-0.gif');
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -127,6 +185,12 @@ z-index: 10; /* Higher value than other grid items */
 
  .obstacle-2 {
   background-image: url('../images/obstacle-2.png');
+   background-repeat: no-repeat;
+   background-size: contain;
+ }
+
+ .obstacle-3 {
+  background-image: url('../images/obstacle-3.jpg');
    background-repeat: no-repeat;
    background-size: contain;
  }
