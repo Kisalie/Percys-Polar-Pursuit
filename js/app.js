@@ -256,6 +256,8 @@ function collisionDetection() {
   }
 }
 
+
+
 rows[0].map((val) => {
   val.style.backgroundImage= 'url(images/arctic.jpg)'
 //  val.style.background = 'cover'
