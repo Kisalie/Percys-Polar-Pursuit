@@ -23,15 +23,15 @@ Welcome to "Percy's Polar Pursuit", a delightful twist on the classic Frogger ga
 ### HTML
 - Header with the title of the game.
 - Intro, win and game over screen with buttons.
-- Adding lives
+- Adding lives.
 ### CSS
 - Game grid styling using flexbox.
 - CSS styling for the start, restart and play again buttons.
-- Character styling
+- Character styling.
 ### JavaScript
-- Dynamic grid
-- The use of `setInterval` to move obstacles
-- Collision detection
+- Dynamic grid.
+- The use of `setInterval` to move obstacles.
+- Collision detection.
 
 ## My approach:
 I started my project by firstly creating a basic wireframe to get an idea of what I wanted to include in my game. I then collected all the images, Gifs and background images I wanted to include in my project.
@@ -39,7 +39,7 @@ I started my project by firstly creating a basic wireframe to get an idea of wha
 ### My wireframe
 ![wireframe](images/wireframe.png)
 
-Once I had a plan, I built a dynamic grid using JavaScript and I used CSS with a flexbox. Then I added the character and the keydown eventListener function to move the penguin around the grid.
+Once I had a plan, I built a dynamic grid using JavaScript and I used CSS with a flexbox. Then I added the character and the `keydown eventListener` function to move the penguin around the grid.
 ![code for button](images/addcharacter.png)
 
 I started off with adding one obstacle using `setInterval` to move it along the x-axis. Then it was refactored into a function to do multiple obstacles.
@@ -53,13 +53,13 @@ I made multiple buttons that allows the user to navigate properly between screen
 The home screen contains the title and the instructions for the game as well as the start button.
 ![percy's polar pursuit](images/homepage.png)
 
-### Gameplay
+## Gameplay
 
-Once you click the start:
+Once you click start:
 - The backgroud music starts to play and it has a `setInterval` which allows the music to repeat.
 - The character is able to move around the grid.
-- There are 3 hearts at the bottom which shows the 3 lives
-- There is a collision detection function, that periodiacally checks whether both the players x and y coordinates are exactly the same as any of the obstacles.
+- There are 3 hearts at the bottom which shows the 3 lives.
+- There is a collision detection function, that periodically checks whether both the players x and y coordinates are exactly the same as any of the obstacles.
 
 ![thegrid](images/thegrid.png)
 
